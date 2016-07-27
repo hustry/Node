@@ -15,3 +15,8 @@ stream.on('error',function(error){
     process.stdout.write("ERROR:" + error.message);
 
 });
+
+// the sync method
+// the require() method is sync!
+var data = fs.readFileSync('target.txt');
+process.stdout.write(data.toString());
