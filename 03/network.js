@@ -2,7 +2,6 @@
 var net = require('net');
 var fs = require('fs');
 
-
 // con:a Socket object
 var server = net.createServer(function(con){
 
@@ -10,7 +9,11 @@ var server = net.createServer(function(con){
 
     var watcher = fs.watch('target.txt',function(){
 
-        con.write("File changed!");
+        con.write(JSON.stringify({
+                type:'changed',
+                file:'target.txt',
+                timestamp:Date.now()
+            })+'\n');
     });
 
     con.on('close',function(){
