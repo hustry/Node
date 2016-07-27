@@ -1,6 +1,8 @@
-
+"use strict";
 
 var fs = require('fs');
+
+var spawn = require('child_process').spawn;
 
 var filename = process.argv[2];
 
@@ -9,8 +11,11 @@ if(!filename){
 }
 
 
-// fs.watch µ±target.txt ±ä»¯Ê±Ö´ĞĞ»Øµ÷º¯Êı
+// fs.watch å½“target.txt å˜åŒ–æ—¶æ‰§è¡Œå›è°ƒå‡½æ•°
 fs.watch(filename,function(){
+
+    var ls = spawn('ls',['-lh',filename]);
+    ls.stdout.pipe(process.stdout);
 
     console.log('File '+ filename +' just changed!');
 
