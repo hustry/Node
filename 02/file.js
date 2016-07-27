@@ -1,10 +1,18 @@
 
 
 var fs = require('fs');
-// fs.watch 当target.txt 变化时执行回调函数
-fs.watch('target.txt',function(){
 
-    console.log('File target.txt just changed!');
+var filename = process.argv[2];
+
+if(!filename){
+    throw Error('File must specified!');
+}
+
+
+// fs.watch 当target.txt 变化时执行回调函数
+fs.watch(filename,function(){
+
+    console.log('File '+ filename +' just changed!');
 
 });
 
